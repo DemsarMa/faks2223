@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<title>Programiranje 5</title>
+<body>
+<script>
+
+U = 1.5;
+Rn = 0.27;
+
+Rbmin = 0.255;
+Rbmax = 0.285;
+
+
+dR = (Rbmax - Rbmin) / 3;
+Rb = Rbmin;
+
+for (i = 0; i < 4; i = i + 1) {
+    P = U * U * Rb / ((Rn + Rb) * (Rn + Rb))
+    console.log(Rb, P);
+
+    Rb = Rb + dR;
+}
+
+</script>
+</body>
+</html>
