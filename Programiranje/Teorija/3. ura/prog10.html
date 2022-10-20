@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<title>Programiranje 10</title>
+<body>
+<script>
+
+U = 1.5;
+Rn = 0.27;
+
+Rbmin = 0;
+Rbmax = 1;
+
+while (Rbmax - Rbmin > 1e-7) {
+    dR = (Rbmax - Rbmin) / 3;
+    Rb = Rbmin;
+    moc = [];
+    uporn = [];
+
+for (i = 0; i < 4; i = i + 1) {
+    P = U * U * Rb / ((Rn + Rb) * (Rn + Rb))
+    //console.log(Rb, P);
+    moc[i] = P;
+    uporn[i] = Rb;
+    
+    Rb = Rb + dR;
+}
+
+
+if (moc[1] > moc[2]) {
+    Rbmax = uporn[2];
+} 
+else {
+    Rbmin = uporn[1];
+}
+}
+console.log(Rbmin);
+
+</script>
+</body>
+</html>
