@@ -3,15 +3,23 @@
 <body>
 <script>
 
-n = 128;
-d = 2; //delitelj
+n = 17;
+d = 1; //delitelj
+s = 0; 
+
 
 console.log("Število je", n);
 
-if(n%d == 0) {
-    console.log("Število je deljivo z", d);
-} else {
-    console.log("Število ni deljivo z", d);
+while(d <= n) {
+    if(n%d == 0) {
+        s = s + 1;
+        console.log(n, "je deljivo z", d);
+    } 
+    d = d + 1;
+}
+
+if (s == 2) {
+    console.log(n, "je praštevilo");
 }
 
 </script>
