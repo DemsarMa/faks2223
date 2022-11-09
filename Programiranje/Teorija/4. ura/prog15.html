@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<title>Programiranje 15</title>
+<body>
+<script>
+
+IBAN = ["SI", 56n, 300000008995913n];
+
+if (IBAN[0] == "SI") {
+    kodaDrzave = 281800n;
+}
+
+else if (IBAN[0] == "DE") {
+    kodaDrzave = 131400n;
+}
+
+koda = IBAN[2] * 1000000n + kodaDrzave;
+
+koda = koda % 97n;
+
+if (98n - koda % 97n == IBAN[1]) {
+    console.log("OK");
+}
+
+//DN EMŠO
+
+</script>
+</body>
+</html>
