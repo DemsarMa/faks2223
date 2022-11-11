@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<title>Programiranje 18</title>
+<body>
+<script>
+
+t = [1, 6, 2, 9, 12, 4, 12, 8, 0]; //0 je čuvaj ali sentinel
+
+x = 8;
+
+indeks = -1;
+for (i = 0; t[i] != 0 && indeks == -1; i++) { //čuvaj je t[i] != 0
+    if (t[i] == x) {
+        indeks = i;
+        //break;
+    }
+}
+
+console.log(indeks);
+
+</script>
+</body>
+</html>
