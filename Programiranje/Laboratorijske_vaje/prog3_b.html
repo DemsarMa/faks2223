@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<title>Programiranje 3 laboratorijske vaje</title>
+<body>
+<script>
+
+t = [5, 1, 4, 2, 8];
+t_len = t.length;
+console.log(t);
+
+
+for(j = 0; j < t_len; j++) {
+    for(i = 0; i < t_len - 1; i++) {
+        if(st_deliteljev(t[i]) > st_deliteljev(t[i + 1])) {
+            tmp = t[i];
+            t[i] = t[i + 1];
+            t[i + 1] = tmp;
+        }
+        if(st_deliteljev(t[i]) == st_deliteljev(t[i + 1])) {
+            if(t[i] > t[i + 1]) {
+                tmp = t[i];
+                t[i] = t[i + 1];
+                t[i + 1] = tmp;
+            }
+        }
+    }
+}
+
+console.log(t);
+
+function st_deliteljev(n){
+var d = 1; //delitelj
+var s = 0; 
+
+while(d < n) {
+    if(n%d == 0) {
+        s = s + 1;
+    } 
+    d = d + 1;
+}
+
+return s;
+}
+
+</script>
+</body>
+</html>

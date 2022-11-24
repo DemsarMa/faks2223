@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<title>Programiranje 9</title>
+<body>
+<script>
+
+x = [-6, 33, -12, 7, 99, 10]
+t_len = 6
+
+//funkcija, ki vrne lokacijo najmanjšega elementa iz tabele, na območju med start in stop indeksoma
+
+function najdi_lokacijo_najmanjsega_iz(x, start, stop) {
+    var min = x[0];
+    var min_i = start;
+    for (var i = start; i < stop; i++) {
+        if (x[i] < min) {
+            min = x[i];
+            min_i = i;
+        }
+    }
+    return min_i;
+}
+
+for (i = 0; i < t_len; i++) {
+    lokacija_najmanjsega = najdi_lokacijo_najmanjsega_iz(x, i, t_len);
+    var tmp = x[i];
+    x[i] = x[lokacija_najmanjsega];
+    x[lokacija_najmanjsega] = tmp;
+}
+
+console.log(x);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<title>Programiranje 19</title>
+<body>
+<script>
+
+function sinus(x) {
+    var i, sin = 0;
+    var predznak = 1;
+    for (i = 1; i < 10; i = i + 2) {
+        sin = sin + predznak * potenca(x, i) / faktoriela(i); 
+        predznak = -predznak;
+    }
+    return sin;
+}
+
+function zaokrozi(x, n) {
+    x = x * potenca(10, n);
+    x = Math.round(x);
+    x = x / potenca(10, n);
+    return x;
+}
+
+for (x = 0; x < 2 * Math.PI; x = x + Math.PI / 6) {
+    console.log(zaokrozi(180 * x / Math.PI, 2), zaokrozi(Math.sin(x), 2), zaokrozi(sinus(x), 2));
+}
+
+
+</script>
+</body>
+</html>

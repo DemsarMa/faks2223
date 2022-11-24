@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<title>Programiranje 23</title>
+<body>
+<script>
+
+IBAN = "SI56300000008995913";
+
+a = IBAN.charCodeAt(0) - "A".charCodeAt(0) + 10;
+b = IBAN.charCodeAt(1) - "A".charCodeAt(0) + 10;
+koda = IBAN.substring(4);
+
+console.log(a, b, koda);
+
+a = BigNum(a);
+b = BigNum(b);
+koda = BigNum(koda);
+
+koda = koda * 1000000n + a * 10000n + b * 100n;
+
+koda = koda % 97n;
+if (98n - koda == BigInt(IBAN.substring(2, 4))) {
+    console.log("OK");
+}
+
+//DN EMŠO
+
+</script>
+</body>
+</html>

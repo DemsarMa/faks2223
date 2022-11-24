@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<title>Programiranje 24</title>
+<body>
+<script>
+
+Kombi = Object();
+Kombi.stev = [];
+Kombi.n = 0;
+Kombi.nMaks = 5;
+Kombi.obm = 50;
+
+Kombi.reset = function(n, obm) {
+    Kombi.stev = [];
+    Kombi.n = 0;
+    Kombi.nMaks = n;
+    Kombi.obm = obm;
+}
+
+Kombi.vstavi = function(n) {
+    if (Kombi.n == Kombi.nMaks) {
+        return -1; //polno
+    }
+    for (i = 0; i < Kombi.n; i++) {
+        if (Kombi.stev[i] == n) {
+            return -2; //že obstaja
+        }
+    }
+    Kombi.stev[Kombi.n] = n;
+    Kombi.n++;
+    return 0; //success
+}
+
+Kombi.zrebaj = function() {
+    return Math.floor(Math.random() * Kombi.obm) + 1;
+}
+
+Kombi.reset(5, 50);
+while (Kombi.vstavi(Kombi.zrebaj()) != -1) {}
+Kombi.stev.sort();
+console.log(Kombi.stev);
+Kombi.reset(2, 12);
+while (Kombi.vstavi(Kombi.zrebaj()) != -1) {}
+Kombi.stev.sort();
+console.log(Kombi.stev);
+
+</script>
+</body>
+</html>

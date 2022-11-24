@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<title>Programiranje 10</title>
+<body>
+<script>
+
+prenos = [[0, 0, 1, 1, 0, 1, 0, 1],
+          [1, 0, 1, 1, 0, 1, 0, 0],
+          [0, 1, 0, 1, 0, 0, 1, 1],
+          [1, 1, 0, 1, 0, 0, 1, 0]
+        ];
+
+function is_error(packets, nofpackets, packetlen) {
+    var sum_row = 0;
+    var sum_column = 0;
+    for(var i; i < nofpackets; i++) { //z i določim za katero vrstico bom preveril pariteto
+        sum_row = 0;
+        for(var j; j < packetlen; j++) {
+            sum_row = sum_row + packets[i][j];
+
+        }
+        if(sum_row % 2 == 1) {
+            return true;
+        }
+    for(i = 0; i < packetlen; i++) {
+        sum_column = 0;
+        for(j = 0; j < nofpackets; j++) {
+        sum_column = sum_column + packets[j][i];
+        }
+        if(sum_column % 2 == 1) {
+            return true;
+        }
+    }
+    return false;
+    }
+
+}
+
+</script>
+</body>
+</html>

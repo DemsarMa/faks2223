@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<title>Programiranje 21</title>
+<body>
+<script>
+
+sud = [[4, 1, 2, 3], 
+       [2, 3, 4, 1], 
+       [3, 2, 1, 4], 
+       [1, 4, 3, 2]];
+
+n = 1;
+vr = 0;
+
+for (n = 1 ; n <= 4 ; n++) {
+    for (vr = 0; vr < 4; vr++) {
+        stevec = 0;
+        for (st = 0; st < 4; st++) {
+            if (sud[vr][st] == n) {
+            stevec++;
+        }
+    }
+    if (stevec == 0) {
+    console.log("Vrstica", vr, "manjka", n);
+    }
+}
+}
+</script>
+</body>
+</html>
