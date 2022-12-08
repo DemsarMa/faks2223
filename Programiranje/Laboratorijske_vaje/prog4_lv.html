@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<title>Programiranje 4 laboratorijske vaje</title>
+<charset="UTF-8">
+<body>
+<script>
+
+CHARTABLE = [
+'a', 'b', 'c', 'č', 'd',
+'e', 'f', 'g', 'h', 'i',
+'j', 'k', 'l', 'm', 'n',
+'o', 'p', 'r', 's', 'š',
+'t', 'u', 'v', 'z', 'ž','_', 0];
+
+for(i = 0; CHARTABLE[i] != 0; i++) {}
+CHARTABLE_len = i;
+
+function getChartableIndex(znak) {
+    var i;
+    for(i = 0; CHARTABLE[i] != 0; i++) {
+        if(CHARTABLE[i] == znak) {
+            return i;
+        }
+    }
+    console.log("Napaka: znak " + znak + " ni v tabeli!");
+}
+
+function encryptChar(znak, zamik) {
+    var index = getChartableIndex(znak);
+    index = (index + zamik + CHARTABLE_len) % CHARTABLE_len;
+    return CHARTABLE[index];
+}
+
+PLAIN_MESSAGE = ['p','r','e','m','i','k','_',
+'v','s','e','h','_',
+'e','n','o','t','_',
+'i','z','_','b','r','e','t','a','n','i','j','e','_',
+'v','_',
+'g','a','l','i','j','o','_',
+'t','a','k','o','j','_',
+'c','a','e','s','a','r',0];
+
+console.log(PLAIN_MESSAGE.join(''));
+
+for (i = 0; PLAIN_MESSAGE[i] != 0; i++) {
+    PLAIN_MESSAGE[i] = encryptChar(PLAIN_MESSAGE[i], 3);
+}
+console.log(PLAIN_MESSAGE.join(''));
+
+IMPORTANT_MESSAGE = [
+'v','n','p','b','m','e',
+'g','n','u','l','m','e',
+'f','b','p','u','k','z',
+'b','h','e','g','n','u',
+'l','k','z','b','č','j',
+'e','h', 0];
+
+function decryptChar(znak, zamik) {
+    return encryptChar(znak, -zamik);
+}
+
+for (i = 0; IMPORTANT_MESSAGE[i] != 0; i++) {
+    IMPORTANT_MESSAGE[i] = decryptChar(IMPORTANT_MESSAGE[i], 22);
+}
+console.log(IMPORTANT_MESSAGE.join(''));
+
+
+</script>
+</body>
+</html>

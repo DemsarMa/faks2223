@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<title>Programiranje 28</title>
+<body>
+<script>
+
+Sklad = Object();
+Sklad.podatki = [];
+Sklad.vrh = 0;
+
+
+Sklad.push = function(el) {
+    Sklad.podatki[Sklad.vrh] = el;
+    Sklad.vrh = Sklad.vrh + 1;
+}
+
+Sklad.pop = function() {
+    Sklad.vrh = Sklad.vrh - 1;
+    return Sklad.podatki[Sklad.vrh];
+}
+
+Sklad.size = function() {
+    return Sklad.vrh
+}
+
+Sklad.clear = function() {
+    Sklad.vrh = 0;
+}
+
+function RPN(izr, s){
+    var i, a, b;
+    s.clear();
+    for(i = 0; izr[i] != 0; i++){
+        if (izr[i] > 0 && izr[i] <= 9){
+            s.push(izr[i]);
+        }
+        else if (s.size() > 1){
+            //izvedi operacijo
+            b = s.pop();
+            a = s.pop();
+            switch(izr[i]){
+                case '+':
+                    s.push(a + b);
+                    break;
+                case '-':
+                    s.push(a - b);
+                    break;
+                case '*':
+                    s.push(a * b);
+                    break;
+                case '/':
+                    s.push(a / b);
+                    break;
+                default:
+                    return -2; //Napaka: neveljavna operacija
+            }
+        }
+        else{
+            return -1; //Napaka: premalo operandov
+        }
+    }
+    if (s.size() == 1){
+        return s.pop();
+    }
+    else{
+        return -3; //Napaka: preveč operandov
+    }
+}
+
+console.log(RPN([3, 7, 1, '-', 5, '*', 0], Sklad));
+console.log(Sklad.pop());
+
+function pretvori(n, osn, d, tab) {
+    var i;
+    for (i = d - 1; i >= 0; i--){
+        tab[i] = n % osn;
+        n = Math.floor(n / osn);
+    }
+}
+
+function dodaj(tab, el){
+    var i;
+    for (i = 0; tab[i] != 0; i++);
+    tab[i] = el;
+    tab[i + 1] = 0;
+}
+
+simb = [3, 8, '+', '-', '*', '/'];
+dolz = 7;
+stSimb = 6;
+
+for (i = 0; i < Math.pow(stSimb, dolz); i++){
+    ind = [];
+    pretvori(i, stSimb, dolz, ind);
+    izr = [0];
+    for (j = 0; j < dolz; j++){
+        k = simb[ind[j]];
+        dodaj(izr, k);
+    }
+    if (RPN(izr, Sklad) == 0){
+        vredn = Sklad.pop();
+        if (vredn == 24.0001 && vredn > 23.9999 && prestej(izr, 3) == 2){
+            console.log(izr);
+        }
+    }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<title>Programiranje 3</title>
+<body>
+<script>
+
+Sklad = Object();
+Sklad.podatki = [];
+Sklad.vrh = 0;
+
+
+Sklad.push = function(el) {
+    Sklad.podatki[Sklad.vrh] = el;
+    Sklad.vrh = Sklad.vrh + 1;
+}
+
+Sklad.pop = function() {
+    Sklad.vrh = Sklad.vrh - 1;
+    return Sklad.podatki[Sklad.vrh];
+}
+
+Sklad.size = function() {
+    return Sklad.vrh
+}
+
+Sklad.clear = function() {
+    Sklad.vrh = 0;
+}
+
+/*
+Sklad.push(22);
+Sklad.push(23);
+Sklad.push(24);
+Sklad.psuh(2234);
+console.log(Sklad.size());
+console.log(Sklad.pop());
+console.log(Sklad.pop());
+console.log(Sklad.pop());
+console.log(Sklad.pop());
+*/
+
+function RPN(izr, s) {
+    var i, a, b;
+    s.clear();
+    for(i = 0; izr[i] != 0; i++) {
+    if (izr[i] > 0 && izr[i] <= 9) {
+        s.push(izr[i]);
+    }
+    else if (s.size() > 1) {
+        //izvedi operacijo
+    }
+    else {
+        return -1; //Napaka: premalo operandov
+    }
+}
+}
+
+</script>
+</body>
+</html>
