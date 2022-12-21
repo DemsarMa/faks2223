@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<title>Programiranje 30</title>
+<body>
+<script>
+
+vrsta = Object();
+vrsta.rep = 2;
+vrsta.glava = 2;
+vrsta.velikost = 5;
+
+vrsta.enqueue = function(el) {
+    if (vrsta.glava == (vrsta.rep + 1) % vrsta.velikost) {
+        console.log("Warning: Queue overflow!");
+        return;
+    }
+        vrsta.podatki[vrsta.rep] = el;
+        vrsta.rep = (vrsta.rep + 1) % vrsta.velikost;
+};
+
+vrsta.dequeue = function() {
+    if (vrsta.glava == vrsta.rep) {
+        console.log("Warning: Queue underflow!");
+        return -1;
+    }
+    vrednost = vrsta.podatki[vrsta.glava];
+    vrsta.glava = (vrsta.glava + 1) % vrsta.velikost;
+    return vrednost;
+};
+
+vrsta.enqueue(1);
+vrsta.enqueue(2);
+vrsta.enqueue(3);
+vrsta.enqueue(4);
+vrsta.enqueue(5);
+vrsta.enqueue(6);
+
+for (i = 0; i < 5; i++) {
+    console.log(vrsta.dequeue());
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<title>Programiranje 29</title>
+<body>
+<script>
+
+slovar = Object();
+slovar.podatki = [];
+slovar.konec = 0;
+
+slovar.insert = function(key, val) {
+    var i;
+    for (i = 0; i < slovar.konec; i++) {
+        if (slovar[i][0] == key) {
+            slovar[i][1] = val;
+            return;
+        }
+    }
+    slovar[slovar.konec] = [key, val];
+    slovar.konec = slovar.konec + 1;
+};
+
+slovar.lookup = function(key) {
+    var i;
+    for (i = 0; i < slovar.konec; i++) {
+        if (slovar.podatki[i][0] == key) {
+            return slovar.podatki[i][1];
+        }
+    }
+    return -1;
+};
+
+slovar.insert("tree", "drevo");
+slovar.insert("house", "hiša");
+
+console.log(slovar.lookup("tree"));
+
+</script>
+</body>
+</html>

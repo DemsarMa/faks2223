@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<title>Programiranje 13</title>
+<body>
+<script>
+
+sklad = Object();
+sklad.podatki = [];
+sklad.vrh = 0;
+sklad.max = 10;
+
+sklad.push = function(el) {
+    if (sklad.vrh >= sklad.max) {
+        console.log("Warning: Stack overflow!");
+    }else{
+        sklad.podatki[sklad.vrh] = el;
+        sklad.vrh = sklad.vrh + 1;
+    }
+};
+
+sklad.pop = function() {
+    if (sklad.vrh <= 0) {
+        console.log("Warning: Stack underflow!");
+    }else{
+        sklad.vrh = sklad.vrh - 1;
+        return sklad.podatki[sklad.vrh];
+    }
+};
+
+sklad.size = function() {
+    return sklad.vrh;
+};
+
+sklad.clear = function() {
+    sklad.vrh = 0;
+};
+
+t = [22, 33, 44, 55, 66, 0];
+function zamenjajVrstniRed(tab, sklad){
+    for(i = 0; tab[i] != 0; i++){
+        sklad.push(tab[i]);
+    }
+    for(i = 0; tab[i] != 0; i++){
+        tab[i] = sklad.pop();
+    }
+}
+
+zamenjajVrstniRed(t, sklad);
+console.log(t);
+
+</script>
+</body>
+</html>

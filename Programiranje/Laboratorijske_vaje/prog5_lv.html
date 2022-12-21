@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vaja 5</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script>
+
+
+
+function show(board, w, h){
+    /*
+    Ne spreminjajte te funkcije. 
+    
+    Funkcija show() sprejme tri parametre:
+    board: 2-d tabela celih števil z vrednostmi 0,1 ali 2.
+        0 - polje je prazno
+        1 - žeton - prvi igralec  (izpiše se znak "x")
+        2 - žeton - drugi igralec (izpiše se znak "o")
+    w: širina vhodne 2-d tabele (širina igralnega polja)
+    h: višina vhodne 2-d tabele (višina igralnega polja)
+    
+    
+    Funkcija v konzolo izpiše igralno polje igre 4-v vrsto. 
+    
+    Ne spreminjajte te funkcije. Razen če veste, kaj delate. 
+    Rojec, Olenšek 2022
+    */
+    console.clear();
+    // Legenda znakov:
+    var player1 = [1, "x"], 
+        player2 = [2, "o"], 
+        empty = [0, "."],
+        symbol;
+    // Ostale lok. sprem. 
+    var i, j, text="";
+    // Prva vrstica, izpis zaporednih številk stolpca
+    text += " ";
+    for(j=1; j<=w; j=j+1){
+        text += j + " ";
+    }
+    // Izpis igralnega polja
+    for(i=0; i<h; i=i+1){
+        text += "\n";
+        text += "|";
+        for(j=0; j<w; j=j+1){
+            if(board[i][j] == player1[0]){
+                symbol = player1[1];
+            }
+            else if(board[i][j] == player2[0]){
+                symbol = player2[1];
+            }else if(board[i][j] == empty[0]){
+                symbol = empty[1];
+            }else{
+                symbol = "!"; // neprepoznan znak
+            }
+            text += symbol + ((j==(w-1))?"":" ");
+        }
+        text += "|";
+    }
+    // Spodnje črte
+    text += "\n";
+    text += " ";
+    for(j=0; j<w; j=j+1){
+        text += "- ";
+    }    
+    console.log(text);
+}
+
+function findLine(board, index) {
+    for (var i = 0; i < 6; i++) {
+        console.log(i);
+        if (board[i][index] > 0) {
+            return i - 1;
+        }
+    }
+    return 5;
+}
+
+function right(board, line, column) {
+    var player = board[line][column];
+    for (var i = 0; i < 4; i++) {
+        if (board[line][column + i] != player) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function rightDiagonal(board, line, column) {
+    var player = board[line][column];
+    for (var i = 0; i < 4; i++) {
+        if (board[line + i][column + i] != player) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function down(board, line, column) {
+    var player = board[line][column];
+    for (var i = 0; i < 4; i++) {
+        if (board[line + i][column] != player) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function leftDiagonal(board, line, column) {
+    var player = board[line][column];
+    for (var i = 0; i < 4; i++) {
+        if (board[line + i][column - i] != player) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function win(board) {
+    // vstice
+    for (var line = 0; line < 6; line++) {
+        // stolpci
+        for (var column = 0; column < 7; column++) {
+            // preskok
+            if (board[line][column] == 0 || (line >= 3 && column >= 4)) {
+                continue;
+            }
+
+            // preveri desno
+            if (column <= 3 && right(board, line, column)) {
+                return board[line][column];
+            }
+
+            // preveri desno diagonalo
+            if (line < 3 && column < 4 && rightDiagonal(board, line, column)){
+                return board[line][column];
+            }
+
+            // preveri dol
+            if (line < 3 && down(board, line, column)) {
+                return board[line][column];
+            }
+
+            // preveri levo diagonalo
+            if (line < 3 && column < 4 && leftDiagonal(board, line, column)) {
+                return board[line][column];
+            }
+        }
+    }
+
+    // ni zmage
+    return 0;
+}
+
+function notFull(board) {
+    for (var i = 0; i < 7; i++) {
+        if (board[0][i] == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function main() {
+    
+    // priprava
+    var board = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ]
+    var player1 = true;
+    var insert = -1;
+    var prompt_text = "";
+    var line = 0;
+
+    // igralna zanka
+    while (notFull(board) && win(board) == 0) {
+        show(board, 7, 6);
+
+        // vnos
+        do {
+            if (player1) {
+                prompt_text = "Currently x. Enter column: ";
+            } else {
+                prompt_text = "Currently o. Enter column: ";
+            }
+
+            insert = parseInt(prompt(prompt_text)) - 1;
+        } while (insert < 0 || insert > 6 || board[0][insert] > 0);
+        
+        // dodajanje žetona
+        line = findLine(board, insert);
+        if (player1) {
+            board[line][insert] = 1;
+        } else {
+            board[line][insert] = 2;
+        }
+        
+        // negacija igralca
+        player1 = !player1;
+    }
+
+    // konec
+    show(board, 7, 6);
+
+    var winner = win(board);
+    var players = ["x", "o"];
+    if (winner == 0) {
+        console.log("Full field!");
+    } else {
+        console.log("Winner: " + players[winner - 1]);
+    }
+    
+}
+
+
+main();
+
+
+        </script>
+    </body>
+</html>
