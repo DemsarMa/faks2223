@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<title>Programiranje 14 AV</title>
+<body>
+<script>
+
+function findmax(tabela){
+    if (tabela.length <= 1) {
+        return tabela[0];
+    } else {
+        var kandidat_1 = tabela[0];
+        var kandidat_2 = findmax(tabela.slice(1, tabela.length));
+        if (kandidat_1 > kandidat_2) {
+            return kandidat_1;
+        } else {
+            return kandidat_2;
+        }
+    }
+}
+
+tabela = [1,2,3,4,5,6];
+console.log(findmax(tabela));
+
+</script>
+</body>
+</html>

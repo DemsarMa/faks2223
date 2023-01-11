@@ -3,36 +3,56 @@
 <body>
 <script>
 
-prenos = [[0, 0, 1, 1, 0, 1, 0, 1],
-          [1, 0, 1, 1, 0, 1, 0, 0],
-          [0, 1, 0, 1, 0, 0, 1, 1],
-          [1, 1, 0, 1, 0, 0, 1, 0]
-        ];
-
-function is_error(packets, nofpackets, packetlen) {
+function is_error(packets, nofpackets, packetlen){
     var sum_row = 0;
     var sum_column = 0;
-    for(var i; i < nofpackets; i++) { //z i določim za katero vrstico bom preveril pariteto
+    // preglej pariteto (sodost) v vrsticah:
+    for(var i = 0; i < nofpackets; i++){ // z i določim za katero vrstico bom preveril pariteto
         sum_row = 0;
-        for(var j; j < packetlen; j++) {
+        for(var j=0; j < packetlen; j++){ // z j določim v katerem stolpcu sem
             sum_row = sum_row + packets[i][j];
-
         }
-        if(sum_row % 2 == 1) {
-            return true;
+        if(sum_row % 2 == 1){
+            return 1; // Našli smo napako (v vrstici)!
         }
-    for(i = 0; i < packetlen; i++) {
+    }
+    // preglej pariteto (sodost) v stolpcih:
+    for(i = 0; i < packetlen; i++){// z i tokrat določim za kateri stolpec bom preveril pariteto
         sum_column = 0;
-        for(j = 0; j < nofpackets; j++) {
-        sum_column = sum_column + packets[j][i];
+        for(j = 0; j < nofpackets; j++){
+            sum_column = sum_column + packets[j][i];
         }
-        if(sum_column % 2 == 1) {
-            return true;
+        if(sum_column % 2 == 1){
+            return 1; // Našli smo napako (v stolpcu)!
         }
     }
-    return false;
-    }
+    
+    // return konča delovanje funkcije. Če se do sedaj še ni sprožil smo očitno brez napake. Vrni 0. 
+    return 0;
+}    
 
+prenos = [
+    [0,0,1,1,0,1,0,1], 
+    [1,0,1,1,0,1,0,0], 
+    [0,1,0,1,0,0,1,1],
+    [1,1,0,1,0,0,1,0]
+    ];
+    
+if(is_error(prenos, 4, 8)){
+    console.log("V prenosu je napaka!");
+}else{
+    console.log("Prenos ok.");
+}
+
+// Naredim napako na dveh mestih v 2. vrstici :
+prenos[1][0] = 0;
+prenos[1][7] = 1;
+
+console.log("Po spremembi:");
+if(is_error(prenos, 4, 8)){
+    console.log("V prenosu je napaka!");
+}else{
+    console.log("Prenos ok.");
 }
 
 </script>

@@ -9,7 +9,7 @@ t_len = 6
 //funkcija, ki vrne lokacijo najmanjšega elementa iz tabele, na območju med start in stop indeksoma
 
 function najdi_lokacijo_najmanjsega_iz(x, start, stop) {
-    var min = x[0];
+    var min = x[start];
     var min_i = start;
     for (var i = start; i < stop; i++) {
         if (x[i] < min) {
