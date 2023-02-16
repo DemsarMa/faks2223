@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<title>Programiranje 31</title>
+<body>
+<script>
+
+seznam = Object();
+seznam.glava = Object();
+seznam.glava.vrednost = '?';
+seznam.glava.naslednji = '?';
+seznam.rep = seznam.glava;
+
+seznam.removeBeginning = function(vr) {
+    var vrednost;
+    if (seznam.glava == seznam.rep) {
+        console.log("Warning: List underflow!");
+        return -1;
+    }
+    vrednost = seznam.glava.vrednost;
+    seznam.glava = seznam.glava.naslednji;
+    return vrednost;
+};
+
+seznam.insertBeginning = function(vr) {
+    var nov = Object();
+    nov.vrednost = vr;
+    nov.naslednji = seznam.glava;
+    seznam.glava = nov;
+};
+
+seznam.push = seznam.removeBeginning;
+seznam.push = seznam.insertBeginning;
+
+seznam.push(1);
+seznam.push(2);
+seznam.push(3);
+seznam.push(4);
+
+for (i = 0; i < 10; i++) {
+    seznam.push(seznam.pop());
+}
+
+</script>
+</body>
+</html>

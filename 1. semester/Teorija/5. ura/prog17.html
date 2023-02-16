@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<title>Programiranje 17</title>
+<body>
+<script>
+
+//za lokalno spremenljivko uporabi var
+
+function potenca(x, n) {
+    var i, pot = 1;
+    for (i = 0; i < n; i++) {
+        pot = pot * x;
+    }
+    return pot;
+}
+
+function faktoriela(n) {
+    var i, fkt = 1;
+    for (i = 1; i <= n; i++) {
+        fkt = fkt * i;
+    }
+    return fkt;
+}
+
+for (i = 0; i < 10; i++) {
+    console.log("i:", i, potenca(2, i), faktoriela(i));
+}
+
+console.log(kot, sinus(kot), Math.sin(kot)); //naredi funkcijo??
+
+</script>
+</body>
+</html>
